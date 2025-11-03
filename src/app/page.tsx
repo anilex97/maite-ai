@@ -1,13 +1,13 @@
-import GlobalBackground from "@/components/GlobalBackground";
-import Header from "@/components/Header";
-import Hero from "@/components/Hero";
-import WhyMaite from "@/components/WhyMaite";
-import Surveys from "@/components/Surveys";
-import Avatars from "@/components/Avatars";
-import Plans from "@/components/Plans";
-import Messengers from "@/components/Messengers";
-import FAQ from "@/components/FAQ";
-import Footer from "@/components/Footer";
+import GlobalBackground from "@/Components/GlobalBackground";
+import Header from "@/Components/Header";
+import Hero from "@/Components/Hero";
+import WhyMaite from "@/Components/WhyMaite";
+import Surveys from "@/Components/Surveys";
+import Avatars from "@/Components/Avatars";
+import Plans from "@/Components/Plans";
+import Messengers from "@/Components/Messengers";
+import FAQ from "@/Components/FAQ";
+import Footer from "@/Components/Footer";
 
 export default function HomePage() {
   return (
