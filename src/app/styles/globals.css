@@ -2,21 +2,19 @@
 @import "tailwindcss";
 
 :root {
-  --bg: linear-gradient(180deg, #fff3f8 0%, #fffdfb 100%);
-  --card: rgba(255, 255, 255, 0.65);
-  --copy: #2b2530;
-  --muted: #efe9ee;
+  --bg-light: #fffdfb;
   --primary: #f55c93;
   --secondary: #e4b2c0;
   --accent: #fff3a8;
+  --text: #2b2530;
 
   --font-heading: 'Abhaya Libre', serif;
   --font-body: 'Inter', sans-serif;
 }
 
-body {
-  background: var(--bg);
-  color: var(--copy);
+html, body {
+  background: var(--bg-light);
+  color: var(--text);
   font-family: var(--font-body);
   overflow-x: hidden;
 }
