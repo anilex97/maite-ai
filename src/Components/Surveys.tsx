@@ -1,71 +1,62 @@
 "use client";
 import { motion } from "framer-motion";
 
-const stats = [
-  {
-    value: "20%",
-    text: "Adults feel lonely most of the day",
-    link: "https://www.psychiatry.org/news-room/news-releases/new-apa-poll-one-in-three-americans-feels-lonely-e",
-  },
-  {
-    value: "10%",
-    text: "Feel lonely daily",
-    link: "https://news.gallup.com/poll/651881/daily-loneliness-afflicts-one-five.aspx",
-  },
-  {
-    value: "62%",
-    text: "US working women report burnout",
-    link: "https://www.statista.com/statistics/1383784/us-employees-moderate-levels-of-burnout-by-gender/",
-  },
-  {
-    value: "42%",
-    text: "Cite affordability as reason for not seeking therapy",
-    link: "https://beaminghealth.com/article/therapy-statistics-you-need-to-know",
-  },
-  {
-    value: "29%",
-    text: "Therapy clients report therapist devaluing the client",
-    link: "https://www.tandfonline.com/doi/full/10.1080/10503307.2023.2226813#d1e438",
-  },
-];
-
 const Surveys = () => {
-  return (
-    <section id="surveys" className="relative py-40 px-6 bg-transparent">
-      <div className="max-w-6xl mx-auto text-center">
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="[font-family:var(--font-heading)] text-4xl md:text-5xl mb-16 text-[#2b2530]"
-        >
-          Surveys
-        </motion.h2>
+  const stats = [
+    {
+      percentage: "20%",
+      description: "Adults feel lonely most of the day"
+    },
+    {
+      percentage: "10%",
+      description: "Feel lonely daily"
+    },
+    {
+      percentage: "62%",
+      description: "US working women report burnout"
+    },
+    {
+      percentage: "42%",
+      description: "Cite unaffordability as reason for not seeking therapy"
+    }
+  ];
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-          {stats.map((s, i) => (
-            <motion.a
-              href={s.link}
-              key={i}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="block p-10 rounded-[2rem] bg-white/50 backdrop-blur-xl border border-[#e4b2c0]/30 shadow-[0_10px_40px_rgba(245,92,147,0.05)] hover:shadow-[0_10px_50px_rgba(245,92,147,0.15)] transition-all duration-300"
+  return (
+    <section id="research" className="relative px-6 md:px-16 py-20 md:py-32 max-w-7xl mx-auto">
+      <motion.h2
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="[font-family:var(--font-heading)] text-5xl md:text-6xl text-center mb-16 md:mb-24 text-[#2b2530]"
+      >
+        Scientific Surveys
+      </motion.h2>
+
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12">
+        {stats.map((stat, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+            className="text-center"
+          >
+            <div className="text-6xl md:text-7xl font-bold [font-family:var(--font-heading)] mb-4"
+              style={{
+                WebkitTextStroke: '2px #f55c93',
+                WebkitTextFillColor: 'transparent',
+                color: '#f55c93'
+              }}
             >
-              <h3
-                className="[font-family:var(--font-heading)] text-5xl font-semibold mb-4 bg-clip-text text-transparent"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(90deg, #f55c93, #e4b2c0, #fff3a8)",
-                }}
-              >
-                {s.value}
-              </h3>
-              <p className="[font-family:var(--font-body)] text-lg opacity-80 leading-relaxed">
-                {s.text}
-              </p>
-            </motion.a>
-          ))}
-        </div>
+              {stat.percentage}
+            </div>
+            <p className="[font-family:var(--font-body)] text-base md:text-lg text-[#2b2530] leading-relaxed">
+              {stat.description}
+            </p>
+          </motion.div>
+        ))}
       </div>
     </section>
   );

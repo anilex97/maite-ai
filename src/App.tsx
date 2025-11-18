@@ -1,27 +1,27 @@
-import Hero from "./Components/Hero";
-import WhyChooseUs from "./Components/WhyChooseUs";
-import Research from "./Components/Research";
-import Avatars from "./Components/Avatars";
-import Pricing from "./Components/Pricing";
-import Messengers from "./Components/Messengers";
-import Reviews from "./Components/Reviews";
-import FAQ from "./Components/FAQ";
-import Disclaimer from "./Components/Disclaimer";
+import GlobalBackground from "@/Components/GlobalBackground";
+import Header from "@/Components/Header";
+import Hero from "@/Components/Hero";
+import WhyMaite from "@/Components/WhyMaite";
+import Surveys from "@/Components/Surveys";
+import Avatars from "@/Components/Avatars";
+import Plans from "@/Components/Plans";
+import Messengers from "@/Components/Messengers";
+import FAQ from "@/Components/FAQ";
+import Footer from "@/Components/Footer";
 
-function App() {
+export default function HomePage() {
   return (
-    <div className="bg-bg text-copy font-body overflow-x-hidden">
+    <main className="relative overflow-hidden">
+      <GlobalBackground />
+      <Header />
       <Hero />
-      <WhyChooseUs />
-      <Research />
+      <WhyMaite />
+      <Surveys />
       <Avatars />
-      <Pricing />
+      <Plans />
       <Messengers />
-      <Reviews />
       <FAQ />
-      <Disclaimer />
-    </div>
+      <Footer />
+    </main>
   );
 }
-
-export default App;

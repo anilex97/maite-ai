@@ -1,54 +1,72 @@
 "use client";
 import { motion } from "framer-motion";
-
-const avatars = [
-  { name: "Luna", age: 26, gif: "/avatars/luna.jpg", phrase: "Hi! I'm Luna. Nice to meet you!" },
-  { name: "Theo", age: 30, gif: "/avatars/theo.jpg", phrase: "Hey there! Let’s talk?" },
-  { name: "Maya", age: 24, gif: "/avatars/maya.jpg", phrase: "Hello! How are you feeling today?" },
-];
+import Image from "next/image";
 
 const Avatars = () => {
-  return (
-    <section id="avatars" className="relative py-40 px-6 bg-transparent">
-      <div className="max-w-6xl mx-auto text-center">
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="[font-family:var(--font-heading)] text-4xl md:text-5xl mb-20 text-[#2b2530]"
-        >
-          Pick your avatar
-        </motion.h2>
+  const avatars = [
+    { name: "Maya", image: "/avatars/maya.jpg" },
+    { name: "Theo", image: "/avatars/theo.jpg" },
+    { name: "Luna", image: "/avatars/luna.jpg" },
+  ];
 
-        <div className="flex flex-wrap justify-center gap-16">
-          {avatars.map((a, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
-              whileHover={{ scale: 1.05 }}
-              className="relative w-72 h-72 rounded-[2.5rem] overflow-hidden bg-white/50 backdrop-blur-xl border border-[#e4b2c0]/40 shadow-[0_10px_40px_rgba(245,92,147,0.08)]"
-            >
-              <img
-                src={a.gif}
-                alt={a.name}
-                className="w-full h-full object-cover rounded-[2.5rem]"
-              />
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileHover={{ opacity: 1 }}
-                className="absolute inset-0 bg-[#2b2530]/60 flex flex-col items-center justify-center text-white text-center px-4"
-              >
-                <p className="[font-family:var(--font-heading)] text-2xl mb-1">{a.name}</p>
-                <p className="[font-family:var(--font-body)] text-sm mb-2 opacity-80">
-                  {a.age} y.o.
-                </p>
-                <p className="text-sm italic">{a.phrase}</p>
-              </motion.div>
-            </motion.div>
-          ))}
+  return (
+    <section id="avatars" className="relative px-6 md:px-16 py-20 md:py-32 max-w-7xl mx-auto">
+      <motion.h2
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+        className="[font-family:var(--font-heading)] text-5xl md:text-6xl text-center mb-6 text-[#2b2530]"
+      >
+        Three Easy Steps To Begin
+      </motion.h2>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        className="text-center mb-16"
+      >
+        <div className="inline-block bg-white/60 backdrop-blur-sm border-2 border-[#f55c93]/30 rounded-full px-8 py-4">
+          <span className="text-5xl font-bold text-[#f55c93] [font-family:var(--font-heading)] mr-4">
+            01
+          </span>
+          <span className="text-2xl md:text-3xl [font-family:var(--font-heading)] text-[#2b2530]">
+            Pick Your Avatar
+          </span>
         </div>
+      </motion.div>
+
+      <div className="flex flex-col md:flex-row items-center justify-center gap-12 md:gap-16">
+        {avatars.map((avatar, index) => (
+          <motion.div
+            key={avatar.name}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 + index * 0.1 }}
+            whileHover={{ scale: 1.05 }}
+            className="cursor-pointer"
+          >
+            <div className="relative w-64 h-64 md:w-72 md:h-72 rounded-full overflow-hidden border-4 border-white/50 shadow-2xl">
+              <div className={`absolute inset-0 ${
+                index === 0 
+                  ? 'bg-gradient-to-br from-pink-200/40 to-pink-300/30' 
+                  : index === 1 
+                  ? 'bg-gradient-to-br from-green-100/30 to-teal-100/20'
+                  : 'bg-gradient-to-br from-purple-100/30 to-blue-100/20'
+              } blur-2xl`}></div>
+              <Image
+                src={avatar.image}
+                alt={avatar.name}
+                width={300}
+                height={300}
+                className="relative w-full h-full object-cover"
+              />
+            </div>
+          </motion.div>
+        ))}
       </div>
     </section>
   );
