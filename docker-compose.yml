@@ -7,22 +7,30 @@ services:
       dockerfile: Dockerfile
     container_name: maite-web
     ports:
-      - "3000:3000"
+      - "${PORT}:3000"
     environment:
-      - NODE_ENV=production
+      NODE_ENV: ${NODE_ENV}
+      PORT: ${PORT}
+      HOSTNAME: ${HOSTNAME}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_PORT: ${POSTGRES_PORT}
     restart: unless-stopped
     networks:
       - maite-network
+    depends_on:
+      - db
 
   db:
     image: postgres:16-alpine
     container_name: maite-db
     environment:
-      POSTGRES_USER: maite_user
-      POSTGRES_PASSWORD: maite_password
-      POSTGRES_DB: maite_db
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
-      - "5432:5432"
+      - "${POSTGRES_PORT}:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     restart: unless-stopped
