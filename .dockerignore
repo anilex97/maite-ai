@@ -1,0 +1,26 @@
+# Для Docker
+node_modules
+npm-debug.log*
+.next
+.env*.local
+
+# Git
+.git
+.gitignore
+
+# Vercel
+.vercel
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+dist
+build

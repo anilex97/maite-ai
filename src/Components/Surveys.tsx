@@ -22,7 +22,7 @@ const Surveys = () => {
   ];
 
   return (
-    <section id="research" className="relative px-6 md:px-16 py-20 md:py-32 max-w-7xl mx-auto">
+    <section id="research" className="relative py-20 md:py-32">
       <motion.h2
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}

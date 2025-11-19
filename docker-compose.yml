@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: maite-web
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+    restart: unless-stopped
+    networks:
+      - maite-network
+
+  db:
+    image: postgres:16-alpine
+    container_name: maite-db
+    environment:
+      POSTGRES_USER: maite_user
+      POSTGRES_PASSWORD: maite_password
+      POSTGRES_DB: maite_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+    networks:
+      - maite-network
+
+  adminer:
+    image: adminer:latest
+    container_name: maite-adminer
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    networks:
+      - maite-network
+    depends_on:
+      - db
+
+networks:
+  maite-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
