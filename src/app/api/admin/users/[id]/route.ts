@@ -12,7 +12,7 @@ interface User {
   updatedAt: string;
 }
 
-// Моковые данные (должны быть синхронизированы с основным роутом)
+// Моковые данные
 let mockUsers: User[] = [
   {
     id: 1,
@@ -36,13 +36,14 @@ let mockUsers: User[] = [
   },
 ];
 
-// GET /api/admin/users/[id] - Получение конкретного пользователя
+// GET /api/admin/users/[id]
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const userId = parseInt(params.id);
+    const { id } = await context.params;
+    const userId = parseInt(id);
     const user = mockUsers.find((u) => u.id === userId);
 
     if (!user) {
@@ -58,13 +59,14 @@ export async function GET(
   }
 }
 
-// PUT /api/admin/users/[id] - Обновление пользователя
+// PUT /api/admin/users/[id]
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const userId = parseInt(params.id);
+    const { id } = await context.params;
+    const userId = parseInt(id);
     const body = await request.json();
     const { fullName, phoneNumber, emailAddress, telegramUsername, aiAvatar } =
       body;
@@ -75,7 +77,6 @@ export async function PUT(
       return NextResponse.json({ error: "User not found" }, { status: 404 });
     }
 
-    // Обновление пользователя
     mockUsers[userIndex] = {
       ...mockUsers[userIndex],
       fullName: fullName || mockUsers[userIndex].fullName,
@@ -96,13 +97,14 @@ export async function PUT(
   }
 }
 
-// DELETE /api/admin/users/[id] - Удаление пользователя
+// DELETE /api/admin/users/[id]
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   try {
-    const userId = parseInt(params.id);
+    const { id } = await context.params;
+    const userId = parseInt(id);
     const userIndex = mockUsers.findIndex((u) => u.id === userId);
 
     if (userIndex === -1) {
