@@ -2,6 +2,8 @@
 import { motion } from "framer-motion";
 
 const Plans = () => {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
   const plans = [
     {
       name: "Basic",
@@ -28,6 +30,26 @@ const Plans = () => {
       popular: false
     }
   ];
+
+  const handleBuy = async (planName: string) => {
+    try {
+      const res = await fetch(`${API_URL}/api/subscribe`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ plan: planName })
+      });
+
+      const data = await res.json();
+
+      if (data?.url) {
+        window.location.href = data.url;
+      }
+
+      console.log("Ответ backend:", data);
+    } catch (err) {
+      console.error("Ошибка:", err);
+    }
+  };
 
   return (
     <section id="plans" className="relative px-6 md:px-16 py-20 md:py-32 max-w-7xl mx-auto">
@@ -98,6 +120,7 @@ const Plans = () => {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.97 }}
+                onClick={() => handleBuy(plan.name)}
                 className={`w-full py-4 rounded-full font-medium text-lg shadow-lg bg-gradient-to-r ${
                   plan.popular 
                     ? 'from-[#ffc1d4] to-[#f55c93] text-white' 
